@@ -17,6 +17,11 @@ public class BaseEntity
     public virtual string DescribeRecord()
     {
         return $"Id: {Id}, CreatedAt: {CreatedAt}, ModifiedAt: {ModifiedAt}, CreatedBy: {CreatedBy}, ModifiedBy: {ModifiedBy}";
+        
+        
+        
+        
+        
     }
 
     public void SetModified()
