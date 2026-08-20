@@ -19,9 +19,6 @@ public class BaseEntity
         return $"Id: {Id}, CreatedAt: {CreatedAt}, ModifiedAt: {ModifiedAt}, CreatedBy: {CreatedBy}, ModifiedBy: {ModifiedBy}";
         
         
-        
-        
-        
     }
 
     public void SetModified()
