@@ -12,5 +12,8 @@ public class CommentNotification : Notification
     public void AddMessage(string message)
     {
         Message = message;
+        
+        
+        
     }
 }
