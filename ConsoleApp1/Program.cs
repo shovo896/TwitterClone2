@@ -2,40 +2,16 @@ using System;
 using Twitter_Clone.Entities;
 using TwitterClone.Domain.Entities;
 
-var user = new User();
-var likeNotification = new LikeNotification(user.Id);
-likeNotification.AddMessage("Someone liked your tweet.");
-Console.WriteLine(likeNotification.DescribeRecord());
-
-var message=notification.GetMessage();
-Console.Writelog("print notification")
-    
-    Console.WriteLine("Task 1 done ");
-    
-    
-    
-    
-    //// privent devoloper to make the object
-    ///
-
-    var likeNotification2 = new LikeNotification(Guid.NewGuid()); 
-likeNotification.GetMessage();
-
-
-var commentNotification = new CommentNotification(user.Id);
-commentNotification.AddMessage("Someone liked your tweet.");
-
-
-var mentionNotification = new MentionNotification(Guid.NewGuid());
-
-Console.WriteLine(mentionNotification.DescribeRecord());
-
-
-/// task 2 emon kisu dhukan jeno mention override na korle kaj na kore.
+var notifications  = new List<Notification>();
+foreach (var notification in notifications)
+{
+    new LikeNotification(Guid.NewGuid());
+    new CommentNotification(Guid.NewGuid());
+    new FollosRequestNotification(Guid.NewGuid());
+    new MentionNotification(Guid.NewGuid());
+    new SystemNotification();
 
 
 
 
-
-
-
+}
