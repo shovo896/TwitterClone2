@@ -29,3 +29,13 @@ commentNotification.AddMessage("Someone liked your tweet.");
 var mentionNotification = new MentionNotification(Guid.NewGuid());
 
 Console.WriteLine(mentionNotification.DescribeRecord());
+
+
+/// task 2 emon kisu dhukan jeno mention override na korle kaj na kore.
+
+
+
+
+
+
+
