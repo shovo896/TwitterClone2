@@ -36,10 +36,8 @@ public abstract  class Notification : BaseEntity
         set => _isRead = value;
     }
 
-    public abstract string GetMessage()
-    {
-        return _message;
-    }
+    public abstract string GetMessage();
+    
     
     public override string DescribeRecord()
     {
