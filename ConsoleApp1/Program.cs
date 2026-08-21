@@ -27,3 +27,5 @@ commentNotification.AddMessage("Someone liked your tweet.");
 
 
 var mentionNotification = new MentionNotification(Guid.NewGuid());
+
+Console.WriteLine(mentionNotification.DescribeRecord());
