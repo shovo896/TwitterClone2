@@ -36,7 +36,7 @@ public abstract  class Notification : BaseEntity
         set => _isRead = value;
     }
 
-    public virtual string GetMessage()
+    public abstract string GetMessage()
     {
         return _message;
     }
@@ -46,4 +46,6 @@ public abstract  class Notification : BaseEntity
         var baseRecord = base.DescribeRecord();
         return $"{baseRecord}, UserId: {UserId}, Type: {Type}, Message: {Message}, IsRead: {IsRead}";
     }
-}
+
+    
+    
