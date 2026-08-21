@@ -17,3 +17,8 @@ foreach (var notification in notifications)
 };
 //arr[0]=2
 //arr[1]=3
+
+foreach (var notification in notifications)
+{
+    Console.WriteLine(notification.GetMessage());
+}
