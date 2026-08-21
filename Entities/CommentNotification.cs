@@ -16,4 +16,15 @@ public class CommentNotification : Notification
         
         
     }
+
+    public override string DescribeRecord()
+    {
+        var baseRecord = base.DescribeRecord();
+        return $"{baseRecord}, commentByUserId: {CommentByUserId}";
+    }
+
+    public override string GetMessage()
+    {
+        return $"User with Id {CommentByUserId} has comment {Message}"
+    }
 }
