@@ -20,3 +20,7 @@ Console.Writelog("print notification")
 
     var likeNotification2 = new LikeNotification(Guid.NewGuid()); 
 likeNotification.GetMessage();
+
+
+var commentNotification = new CommentNotification(user.Id);
+commentNotification.AddMessage("Someone liked your tweet.");

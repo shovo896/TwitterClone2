@@ -25,6 +25,6 @@ public class CommentNotification : Notification
 
     public override string GetMessage()
     {
-        return $"User with Id {CommentByUserId} has comment {Message}"
+        return $"User with Id {CommentByUserId} has comment {Message}";
     }
 }
