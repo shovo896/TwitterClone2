@@ -17,6 +17,11 @@ public class LikeNotification : Notification
         Message = message;
     }
 
+    public override string GetMessage()
+    {
+        return $"User Id {LikeByUser?.Id} like {Message}"
+    }
+
     public override string DescribeRecord()
     { 
         var baseRecord = base.DescribeRecord(); 
