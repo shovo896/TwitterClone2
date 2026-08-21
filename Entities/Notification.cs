@@ -40,4 +40,17 @@ public class Notification : BaseEntity
     {
         return _message;
     }
+    
+    public override string DescribeRecord()
+    {
+        var baseRecord = base.DescribeRecord();
+        return $"{baseRecord}",UserId:{UserId},Type:{Type},Message:{Message},IsRad:{IsRead};
+        
+    }
+
+    public string GetMessage()
+    {
+        return $"general notification message"
+        
+    }
 }
