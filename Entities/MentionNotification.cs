@@ -6,5 +6,22 @@ public class MentionNotification : Notification
     {
         MentionedByUserId= mentionedByUserId;
     }
+    public guid MentionedByUserId { get; set; };
+
+    public void AddMessage(string message)
+    {
+        Message = message;
+    }
+
+    public override string DescribeRecord()
+    {
+        var baseRecord = base.DescribeRecord();
+        return $"{MentionedByUserId} {baseRecord}";
+    }
+
+    public override string GetMessage()
+    {
+        return $"User with Id{MentionedByUserId} and Mentioned {MentionedByUserId}";
+    }
     
 }
