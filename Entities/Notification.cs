@@ -1,6 +1,6 @@
 namespace Twitter_Clone.Entities;
 
-public abstract  class Notification : BaseEntity
+public abstract class Notification : BaseEntity
 {
     private Guid _userId;
     private string _type = string.Empty;
@@ -49,8 +49,4 @@ public abstract  class Notification : BaseEntity
     {
         return $"userId: {UserId}, type: {Type}";
     }
-    
-    
-
-    
-    
+}

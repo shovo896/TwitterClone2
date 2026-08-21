@@ -1,22 +1,29 @@
 using System;
 using Twitter_Clone.Entities;
-using TwitterClone.Domain.Entities;
 
-var notifications  = new List<Notification>();
-foreach (var notification in notifications)
+var likeNotification = new LikeNotification(Guid.NewGuid());
+likeNotification.AddMessage("your tweet");
+
+var commentNotification = new CommentNotification(Guid.NewGuid());
+commentNotification.AddMessage("Nice post!");
+
+var followRequestNotification = new FollosRequestNotification(Guid.NewGuid());
+followRequestNotification.AddMessage("Please accept my request.");
+
+var mentionNotification = new MentionNotification(Guid.NewGuid());
+mentionNotification.AddMessage("in a tweet");
+
+var systemNotification = new SystemNotification();
+systemNotification.AddMessage("Welcome to Twitter Clone.");
+
+var notifications = new List<Notification>
 {
-    new LikeNotification(Guid.NewGuid());
-    new CommentNotification(Guid.NewGuid());
-    new FollosRequestNotification(Guid.NewGuid());
-    new MentionNotification(Guid.NewGuid());
-    new SystemNotification();
-
-
-
-
+    likeNotification,
+    commentNotification,
+    followRequestNotification,
+    mentionNotification,
+    systemNotification
 };
-//arr[0]=2
-//arr[1]=3
 
 foreach (var notification in notifications)
 {

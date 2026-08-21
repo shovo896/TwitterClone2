@@ -19,7 +19,7 @@ public class LikeNotification : Notification
 
     public override string GetMessage()
     {
-        return $"User Id {LikeByUser?.Id} like {Message}"
+        return $"User with Id {LikeByUserId} liked: {Message}";
     }
 
     public override string DescribeRecord()

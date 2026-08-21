@@ -4,9 +4,10 @@ public class MentionNotification : Notification
 {
     public MentionNotification(Guid mentionedByUserId) : base("Mention")
     {
-        MentionedByUserId= mentionedByUserId;
+        MentionedByUserId = mentionedByUserId;
     }
-    public guid MentionedByUserId { get; set; };
+
+    public Guid MentionedByUserId { get; set; }
 
     public void AddMessage(string message)
     {
@@ -21,7 +22,6 @@ public class MentionNotification : Notification
 
     public override string GetMessage()
     {
-        return $"User with Id{MentionedByUserId} and Mentioned {MentionedByUserId}";
+        return $"User with Id {MentionedByUserId} mentioned you: {Message}";
     }
-    
 }
