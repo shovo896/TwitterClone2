@@ -24,3 +24,6 @@ likeNotification.GetMessage();
 
 var commentNotification = new CommentNotification(user.Id);
 commentNotification.AddMessage("Someone liked your tweet.");
+
+
+var mentionNotification = new MentionNotification(Guid.NewGuid());
