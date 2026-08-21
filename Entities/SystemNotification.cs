@@ -23,6 +23,7 @@ public class SystemNotification :Notification
         {
                 return $"{base.DescribeRecord()}, Message: {Message}";
         }
+        
     }
     
 }
