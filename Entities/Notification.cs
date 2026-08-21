@@ -44,6 +44,8 @@ public abstract  class Notification : BaseEntity
         var baseRecord = base.DescribeRecord();
         return $"{baseRecord}, UserId: {UserId}, Type: {Type}, Message: {Message}, IsRead: {IsRead}";
     }
+    
+    
 
     
     
