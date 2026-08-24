@@ -6,6 +6,7 @@ public class ClassTest
 {
     public void Run()
     {
+        BaseEntity likeNotification = new LikeNotification(Guid.NewGuid());
         var notifications = new List<Notification>()
         {
             new LikeNotification(Guid.NewGuid()),
