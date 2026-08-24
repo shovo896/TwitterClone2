@@ -20,7 +20,7 @@ namespace TwitterClone.Domain.Entities
 
         public string Content { get; private set; }
 
-        public void AddContent(string content)
+        public void AddContent(Guid userId,string content)
         {
            Content = string.IsNullOrEmpty(content) ? string.Empty : content;
         }
