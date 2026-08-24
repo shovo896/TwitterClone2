@@ -9,7 +9,7 @@ public class Class10Test
     {
         public void Run()
         {
-            var tweet = new Tweet();
+            var tweet = new Tweet("This is my home ");
         }
     }
 }
