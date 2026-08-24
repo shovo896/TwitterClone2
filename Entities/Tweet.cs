@@ -2,7 +2,7 @@ using Twitter_Clone.Entities;
 
 namespace TwitterClone.Domain.Entities
 {
-    public class Tweet : BaseEntity
+    public class Tweet : BaseEntity,Likeable
     {
         private Guid _userId;
         private string _content = string.Empty;
