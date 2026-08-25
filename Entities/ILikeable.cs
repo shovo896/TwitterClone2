@@ -4,6 +4,6 @@ public  interface ILikeable
 {
     bool CanBeLiked();
 
-    bool CanBeLiked();
+    bool CanBeLiked(string value);
 
 }
