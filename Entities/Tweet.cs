@@ -2,7 +2,7 @@ using Twitter_Clone.Entities;
 
 namespace TwitterClone.Domain.Entities
 {
-    public class Tweet : BaseEntity,Likeable
+    public class Tweet : BaseEntity,ILikeable
     {
         private Guid _userId;
         private string _content = string.Empty;
@@ -23,6 +23,12 @@ namespace TwitterClone.Domain.Entities
         public void AddContent(Guid userId,string content)
         {
            Content = string.IsNullOrEmpty(content) ? string.Empty : content;
+        
+           
+    }
+
+        public bool CanBeLiked()
+        {
+            return true; 
         }
     }
-}
