@@ -34,6 +34,7 @@ namespace Twitter.Test
             var Tweet = new Tweet("Hello World!");
             Tweet.AddContent("This is mt content");
             ILikeable likeableTweet = new Tweet("This is another tweet");
+            Console.WriteLine(likeableTweet.CanBeLiked());
 
         }
     }
