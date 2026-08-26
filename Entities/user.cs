@@ -46,6 +46,10 @@ namespace TwitterClone.Domain.Entities
 
        public void Unfollow(Guid userId)
        {
+           if (_followers.Contains(userId))
+           {
+               _followers.Remove(userId);
+           }
            
        }
     }
