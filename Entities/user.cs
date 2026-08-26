@@ -33,6 +33,7 @@ namespace TwitterClone.Domain.Entities
        }
 
        private List<Guid> _followers=new List<Guid>();
+       private List<Guid> _inComingNotifications=new List<Guid>();
 
        public void Follow(Guid userId)
        {
@@ -52,5 +53,15 @@ namespace TwitterClone.Domain.Entities
            }
            
        }
+
+       public void AddNotification(Guid notificationId)
+       {
+           if (!_inComingNotifications.Contains(notificationId))
+           {
+               _inComingNotifications.Add(notificationId);
+           }
+       }
+       
+       
     }
 }
