@@ -32,10 +32,14 @@ namespace TwitterClone.Domain.Entities
            set => _email = value;
        }
 
-       private List<Guid> _users;
+       private List<Guid> _followers=new List<Guid>();
 
        public void Follow(Guid userId)
        {
+           if (!_followers.Contains(userId))
+           {
+               _followers.Add(userId);
+           }
            
            
        }
