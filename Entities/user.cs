@@ -7,6 +7,7 @@ namespace TwitterClone.Domain.Entities
        private string _firstName = string.Empty;
        private string _lastName = string.Empty;
        private string _email = string.Empty;
+       
 
        public User() : base(Guid.NewGuid())
        {
@@ -31,8 +32,11 @@ namespace TwitterClone.Domain.Entities
            set => _email = value;
        }
 
+       private List<Guid> _users;
+
        public void Follow(Guid userId)
        {
+           
            
        }
 
