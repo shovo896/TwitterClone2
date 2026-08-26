@@ -2,14 +2,15 @@ using Twitter_Clone.Entities;
 
 namespace TwitterClone.Domain.Entities
 {
-    public class User : BaseEntity
+    public class User : BaseEntity,Ifollowable,INotifiable
     {
        private string _firstName = string.Empty;
        private string _lastName = string.Empty;
        private string _email = string.Empty;
 
-       public User()
+       public User() : base(Guid.NewGuid())
        {
+           
        }
 
        public string FirstName
