@@ -30,5 +30,15 @@ namespace TwitterClone.Domain.Entities
            get => _email;
            set => _email = value;
        }
+
+       public void Follow(Guid userId)
+       {
+           
+       }
+
+       public void Unfollow(Guid userId)
+       {
+           
+       }
     }
 }
