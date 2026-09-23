@@ -5,8 +5,7 @@ namespace TwitterClone.Domain.Entities
     public class Tweet : BaseEntity,ILikeable
     {
         private Guid _userId;
-        private string _content = string.Empty;
-        public static string MaxContentLength = 200;
+        public const int MaxContentLength = 200;
 
         public Tweet(string content)
         {
@@ -23,13 +22,23 @@ namespace TwitterClone.Domain.Entities
 
         public void AddContent(Guid userId,string content)
         {
+           UserId = userId;
            Content = string.IsNullOrEmpty(content) ? string.Empty : content;
-        
-           
-    }
+        }
+
+        public void AddContent(string content)
+        {
+           Content = string.IsNullOrEmpty(content) ? string.Empty : content;
+        }
 
         public bool CanBeLiked()
         {
             return true; 
         }
+
+        public bool CanBeLiked(string value)
+        {
+            return !string.IsNullOrWhiteSpace(value);
+        }
     }
+}

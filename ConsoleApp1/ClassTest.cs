@@ -1,4 +1,5 @@
 using Twitter_Clone.Entities;
+using TwitterClone.Domain.Entities;
 
 namespace ConsoleApp1;
 
@@ -11,7 +12,7 @@ public class ClassTest
         {
             new LikeNotification(Guid.NewGuid()),
             new CommentNotification(Guid.NewGuid()),
-            new FriendRequestNotification(Guid.NewGuid()),
+            new FollosRequestNotification(Guid.NewGuid()),
             new MentionNotification(Guid.NewGuid()),
             new SystemNotification()
         };

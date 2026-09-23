@@ -14,6 +14,12 @@ public class BaseEntity
         CreatedAt = DateTime.UtcNow;
     }
 
+    protected BaseEntity(Guid id)
+    {
+        Id = id;
+        CreatedAt = DateTime.UtcNow;
+    }
+
     public virtual string DescribeRecord()
     {
         return $"Id: {Id}, CreatedAt: {CreatedAt}, ModifiedAt: {ModifiedAt}, CreatedBy: {CreatedBy}, ModifiedBy: {ModifiedBy}";
