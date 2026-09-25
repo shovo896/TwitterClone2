@@ -12,11 +12,17 @@ public sealed class TweetsController(TweetStore store, IOptions<TwitterSettings>
 {
     [HttpGet]
     [ProducesResponseType<IReadOnlyCollection<TweetResponse>>(StatusCodes.Status200OK)]
+    private readonly IConfiguration _configuration;
     public IActionResult GetTweets() => Ok(new
     {
         maxTweetLength = settings.Value.MaxTweetLength,
         tweets = store.GetAll()
     });
+
+    public TwitterController(IConfiguration configuration)
+    {
+        
+    }
 
     [HttpGet("{id:int}")]
     [ProducesResponseType<TweetResponse>(StatusCodes.Status200OK)]
