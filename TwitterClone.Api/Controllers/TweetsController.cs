@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using TwitterClone.Api.Models;
@@ -10,9 +11,9 @@ namespace TwitterClone.Api.Controllers;
 [Route("api/[controller]")]
 public sealed class TweetsController(TweetStore store, IOptions<TwitterSettings> settings) : ControllerBase
 {
-    [HttpGet]
-    [ProducesResponseType<IReadOnlyCollection<TweetResponse>>(StatusCodes.Status200OK)]
+    [HttpGet] [ProducesResponseType<IReadOnlyCollection<TweetResponse>>(StatusCodes.Status200OK)]
     private readonly IConfiguration _configuration;
+
     public IActionResult GetTweets() => Ok(new
     {
         maxTweetLength = settings.Value.MaxTweetLength,
@@ -22,12 +23,32 @@ public sealed class TweetsController(TweetStore store, IOptions<TwitterSettings>
     public TwitterController(IConfiguration configuration)
     {
         _configuration = configuration;
-        
+
     }
 
     public void GetTweets(Guid id)
     {
-        var connectString =_configuration.GetValue<string>("Logging:LogLevel:Default");
+        var connectString = _configuration.GetValue<string>("Logging:LogLevel:Default");
+    }
+
+    [HttpGet]
+    public IActionResult GetTweets
+    {
+        var tweets = new List<Tweet> {
+        new Tweet("My first tweet"){
+        Id = Guid.NewGuid(),
+        UserId = Guid.NewGuid(),
+        Content = "Hello ,world",
+    },
+
+    new Tweet("my second Tweet")
+    {
+        UserId = Guid.NewGuid(),
+        content = "This is my secondf tweet"; 
+    },
+};
+
+return Ok(tweets);
     }
 
     [HttpGet("{id:int}")]
