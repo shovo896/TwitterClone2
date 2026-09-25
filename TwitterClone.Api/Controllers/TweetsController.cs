@@ -27,7 +27,7 @@ public sealed class TweetsController(TweetStore store, IOptions<TwitterSettings>
 
     public void GetTweets(Guid id)
     {
-        var connectString =_configuration.GetValue<string>("");
+        var connectString =_configuration.GetValue<string>("Logging:LogLevel:Default");
     }
 
     [HttpGet("{id:int}")]
