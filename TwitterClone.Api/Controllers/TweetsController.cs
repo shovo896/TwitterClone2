@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using TwitterClone.Api.Models;
@@ -9,46 +8,19 @@ namespace TwitterClone.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public sealed class TweetsController(TweetStore store, IOptions<TwitterSettings> settings) : ControllerBase
+public sealed class TweetsController(
+    TweetStore store,
+    IOptions<TwitterSettings> settings) : ControllerBase
 {
-    [HttpGet] [ProducesResponseType<IReadOnlyCollection<TweetResponse>>(StatusCodes.Status200OK)]
-    private readonly IConfiguration _configuration;
-
-    public IActionResult GetTweets() => Ok(new
-    {
-        maxTweetLength = settings.Value.MaxTweetLength,
-        tweets = store.GetAll()
-    });
-
-    public TwitterController(IConfiguration configuration)
-    {
-        _configuration = configuration;
-
-    }
-
-    public void GetTweets(Guid id)
-    {
-        var connectString = _configuration.GetValue<string>("Logging:LogLevel:Default");
-    }
-
     [HttpGet]
-    public IActionResult GetTweets
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public IActionResult GetTweets()
     {
-        var tweets = new List<Tweet> {
-        new Tweet("My first tweet"){
-        Id = Guid.NewGuid(),
-        UserId = Guid.NewGuid(),
-        Content = "Hello ,world",
-    },
-
-    new Tweet("my second Tweet")
-    {
-        UserId = Guid.NewGuid(),
-        content = "This is my secondf tweet"; 
-    },
-};
-
-return Ok(tweets);
+        return Ok(new
+        {
+            maxTweetLength = settings.Value.MaxTweetLength,
+            tweets = store.GetAll()
+        });
     }
 
     [HttpGet("{id:int}")]
@@ -63,11 +35,14 @@ return Ok(tweets);
     [HttpPost]
     [ProducesResponseType<TweetResponse>(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<TweetResponse> CreateTweet(CreateTweetRequest request)
+    public ActionResult<TweetResponse> CreateTweet([FromBody] CreateTweetRequest request)
     {
         if (request.Text.Trim().Length > settings.Value.MaxTweetLength)
         {
-            ModelState.AddModelError(nameof(request.Text), $"Tweet cannot exceed {settings.Value.MaxTweetLength} characters.");
+            ModelState.AddModelError(
+                nameof(request.Text),
+                $"Tweet cannot exceed {settings.Value.MaxTweetLength} characters.");
+
             return ValidationProblem(ModelState);
         }
 
