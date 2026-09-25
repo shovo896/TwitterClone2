@@ -21,7 +21,13 @@ public sealed class TweetsController(TweetStore store, IOptions<TwitterSettings>
 
     public TwitterController(IConfiguration configuration)
     {
+        _configuration = configuration;
         
+    }
+
+    public void GetTweets(Guid id)
+    {
+        var connectString =_configuration.GetValue<string>("");
     }
 
     [HttpGet("{id:int}")]
