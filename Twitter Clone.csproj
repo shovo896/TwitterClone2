@@ -10,6 +10,7 @@
   <ItemGroup>
     <Compile Remove="Tests\**\*.cs" />
     <Compile Remove="ConsoleApp1\**\*.cs" />
+    <Compile Remove="TwitterClone.Api\**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\twgy\" />
