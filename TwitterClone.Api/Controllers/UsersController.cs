@@ -22,4 +22,13 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         appName = configuration["AppName"],
         environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"
     });
+
+    public IActionResult GetUserById(Guid id) => Ok(new
+        {
+            userId = id,
+            UserName = "user" + id.ToString(),
+
+
+        }
+    );
 }
