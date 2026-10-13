@@ -22,6 +22,12 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         appName = configuration["AppName"],
         environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"
     });
+    
+    // api id get
+    
+    
+    
+    [HttpGet("{id}")]
 
     public IActionResult GetUserById(Guid id) => Ok(new
         {
