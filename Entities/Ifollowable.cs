@@ -1,3 +1,5 @@
+using System;
+
 namespace Twitter_Clone.Entities;
 
 public interface Ifollowable
