@@ -38,4 +38,28 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
 
         }
     );
+
+    [HttpGet("{id}/phoneNumber")]
+    {
+        IActionResult UpdateUserPhoneNumber([FromRoute] Guid id, [FromBody] string phoneNumber) => Ok(new
+            {
+ 
+                return OK (
+                {
+
+                UserId = id,
+                PhoneNumber = phoneNumber,
+            }
+
+
+
+        ); 
+                
+                
+                
+                
+                
+            }
+        );
+    }
 }
