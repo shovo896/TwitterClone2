@@ -1,6 +1,11 @@
 namespace TwitterClone.Api.Attributes;
 
-public class TweetAttribute
+public class TweetAttribute : Attribute
 {
+
+    public TweetAttribute()
+    {
+        
+    }
     
 }

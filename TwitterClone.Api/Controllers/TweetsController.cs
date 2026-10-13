@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using TwitterClone.Api.Attributes;
 using TwitterClone.Api.Models;
 using TwitterClone.Api.Options;
 using TwitterClone.Api.Services;
@@ -31,6 +32,8 @@ public sealed class TweetsController(
         var tweet = store.GetById(id);
         return tweet is null ? NotFound() : Ok(tweet);
     }
+    
+    [Tweet]
 
     [HttpPost]
     [ProducesResponseType<TweetResponse>(StatusCodes.Status201Created)]
