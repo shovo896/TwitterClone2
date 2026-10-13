@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace TwitterClone.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public sealed class UsersController(IConfiguration configuration) : ControllerBase
 {
@@ -16,7 +17,7 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
     });
 
     [HttpPost("app-info")]
-    [Authorize]
+
     public IActionResult GetAppInfo() => Ok(new
     {
         appName = configuration["AppName"],
