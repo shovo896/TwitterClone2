@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TwitterClone.Api.Controllers;
@@ -15,6 +16,7 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
     });
 
     [HttpPost("app-info")]
+    [Authorize]
     public IActionResult GetAppInfo() => Ok(new
     {
         appName = configuration["AppName"],
