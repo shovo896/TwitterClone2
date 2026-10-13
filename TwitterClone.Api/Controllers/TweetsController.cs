@@ -33,7 +33,7 @@ public sealed class TweetsController(
         return tweet is null ? NotFound() : Ok(tweet);
     }
     
-    [Tweet]
+   
 
     [HttpPost]
     [ProducesResponseType<TweetResponse>(StatusCodes.Status201Created)]
