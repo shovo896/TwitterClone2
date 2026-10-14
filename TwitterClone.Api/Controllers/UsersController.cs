@@ -9,7 +9,7 @@ namespace TwitterClone.Api.Controllers;
 public sealed class UsersController(IConfiguration configuration) : ControllerBase
 {
     [HttpGet]
-    public IActionResult GetUsers() => Ok(new[]
+    public ActionResult<IEnumerable<object>> GetUsers() => Ok(new[]
     {
         new { id = 1, name = "Shuvo", handle = "@shuvo" },
         new { id = 2, name = "CPS Academy", handle = "@cpsacademy" },
@@ -17,49 +17,33 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
     });
 
     [HttpPost("app-info")]
-
     public IActionResult GetAppInfo() => Ok(new
     {
         appName = configuration["AppName"],
         environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"
     });
-    
-    // api id get
-    
-    
-    
-    [HttpGet("{id}")]
 
-    public IActionResult GetUserById(Guid id) => Ok(new
+    [HttpGet("{id:guid}")]
+    public IActionResult GetUserById([FromRoute] Guid id) => Ok(new
+    {
+        userId = id,
+        userName = $"user{id}"
+    });
+
+    [HttpPut("{id:guid}/phoneNumber")]
+    public IActionResult UpdateUserPhoneNumber(
+        [FromRoute] Guid id,
+        [FromBody] string phoneNumber)
+    {
+        if (string.IsNullOrWhiteSpace(phoneNumber))
+        {
+            return BadRequest("Phone number is required.");
+        }
+
+        return Ok(new
         {
             userId = id,
-            UserName = "user" + id.ToString(),
-
-
-        }
-    );
-
-    [HttpGet("{id}/phoneNumber")]
-    {
-        IActionResult UpdateUserPhoneNumber([FromRoute] Guid id, [FromBody] string phoneNumber) => Ok(new
-            {
- 
-                return OK (
-                {
-
-                UserId = id,
-                PhoneNumber = phoneNumber,
-            }
-
-
-
-        ); 
-                
-                
-                
-                
-                
-            }
-        );
+            phoneNumber
+        });
     }
 }
