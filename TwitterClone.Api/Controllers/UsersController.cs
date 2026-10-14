@@ -46,6 +46,18 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         return UpdatePhoneNumber(id, phoneNumber);
     }
 
+    [HttpDelete("{id:guid}/phoneNumber")]
+    public IActionResult DeleteUserPhoneNumber([FromRoute] Guid id)
+    {
+        return Ok(new
+        {
+            userId = id,
+            Message= "User deleted sucessfully ", 
+            userName = $"user{id}"
+
+        });
+    }
+
     private IActionResult UpdatePhoneNumber(Guid id, string phoneNumber)
     {
         if (string.IsNullOrWhiteSpace(phoneNumber))
