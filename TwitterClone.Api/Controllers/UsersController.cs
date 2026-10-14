@@ -35,6 +35,19 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         [FromRoute] Guid id,
         [FromBody] string phoneNumber)
     {
+        return UpdatePhoneNumber(id, phoneNumber);
+    }
+
+    [HttpPatch("{id:guid}/phoneNumber")]
+    public IActionResult PatchUserPhoneNumber(
+        [FromRoute] Guid id,
+        [FromBody] string phoneNumber)
+    {
+        return UpdatePhoneNumber(id, phoneNumber);
+    }
+
+    private IActionResult UpdatePhoneNumber(Guid id, string phoneNumber)
+    {
         if (string.IsNullOrWhiteSpace(phoneNumber))
         {
             return BadRequest("Phone number is required.");
