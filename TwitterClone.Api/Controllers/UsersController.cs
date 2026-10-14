@@ -16,7 +16,7 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         new { id = 3, name = "ASP.NET Learner", handle = "@dotnetlearner" }
     });
 
-    [HttpPost("app-info")]
+    [HttpGet("app-info")]
     public IActionResult GetAppInfo() => Ok(new
     {
         appName = configuration["AppName"],
