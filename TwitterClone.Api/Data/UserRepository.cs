@@ -12,4 +12,11 @@ public class UserRepository
         _Users.Add(user);
         return user;
     }
+
+    public User UpdateUser(User user)
+    {
+        _users.RemoveAll(u => u.ID == user.Id);
+        _Users.Add(user);
+        return user;
+    }
 }
