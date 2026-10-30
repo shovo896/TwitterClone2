@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TwitterClone.Api.Dtos;
 
 namespace TwitterClone.Api.Controllers;
 
@@ -8,6 +9,8 @@ namespace TwitterClone.Api.Controllers;
 [Route("api/[controller]")]
 public sealed class UsersController(IConfiguration configuration) : ControllerBase
 {
+    
+    
     [HttpGet]
     public ActionResult<IEnumerable<object>> GetUsers() => Ok(new[]
     {
@@ -15,6 +18,26 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         new { id = 2, name = "CPS Academy", handle = "@cpsacademy" },
         new { id = 3, name = "ASP.NET Learner", handle = "@dotnetlearner" }
     });
+
+    [HttpPost]
+    [AllowAnonymous]
+    public IActionResult CreateUser([FromBody] CreateUserDtos)
+    {
+        return Ok(new
+            {
+                UserId = Guid.NewGuid(),
+                UserName = $"user{Guid.NewGuid()}"
+            }
+        ); 
+
+
+
+
+
+
+
+
+    }
 
     [HttpGet("app-info")]
     public IActionResult GetAppInfo() => Ok(new
