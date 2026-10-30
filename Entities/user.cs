@@ -16,9 +16,7 @@ namespace TwitterClone.Domain.Entities
            
        }
 
-       private string _firstName;
-       private string _lastName;
-       private string _email; 
+     
 
        public string FirstName
        {
