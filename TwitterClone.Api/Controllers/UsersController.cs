@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Migrations.Operations.Builders;
 using TwitterClone.Api.Dtos;
 
 namespace TwitterClone.Api.Controllers;
@@ -23,6 +24,12 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
     [AllowAnonymous]
     public IActionResult CreateUser([FromBody] CreateUserDtos)
     {
+        if (string.IsNullOrWhiteSpace(CreateUserDtos.FirstName) || string.IsNullOrWhiteSpace(CreateUserDtos.LastName) ||
+            string.IsNullOrWhiteSpace(CreateUserDtos.Email))
+        {
+            return BadRequest("All fields are required.");
+        }
+        
         return Ok(new
             {
                 UserId = Guid.NewGuid(),
