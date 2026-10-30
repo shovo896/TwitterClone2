@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Twitter_Clone.TwitterClone.Api.Data;
 using TwitterClone.Api.Dtos;
+using TwitterClone.Domain.Entities;
 
 namespace TwitterClone.Api.Controllers;
 
@@ -30,14 +31,22 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         {
             return BadRequest("All fields are required.");
         }
+        var userRepository = new UserRepository();
 
-        var userRepository = new UserRepository(); 
+        var createdUser = new UserRepository();
+        {
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Email = request.Email
+        };
 
-        var userId = Guid.NewGuid();
+        var userRepository = new UserRepository();
+        userRepository.AddUser(user);
+
         return Ok(new
         {
-            UserId = userId,
-            UserName = $"user{userId}"
+            UserId = user.Id,
+            UserName = $"user{user.Id}"
         });
     }
 
