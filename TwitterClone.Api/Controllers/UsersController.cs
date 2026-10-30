@@ -84,12 +84,13 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         if (string.IsNullOrWhiteSpace(phoneNumber))
         {
             return BadRequest("Phone number is required.");
+            
         }
 
         return Ok(new
         {
-            userId = id,
-            phoneNumber
+            userId = Guid.NewGuid(),
+            UserName = $"user{id}"
         });
     }
 }
