@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Migrations.Operations.Builders;
 using TwitterClone.Api.Dtos;
 
 namespace TwitterClone.Api.Controllers;
@@ -22,28 +21,21 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
 
     [HttpPost]
     [AllowAnonymous]
-    public IActionResult CreateUser([FromBody] CreateUserDtos)
+    public IActionResult CreateUser([FromBody] CreateUserDtos request)
     {
-        if (string.IsNullOrWhiteSpace(CreateUserDtos.FirstName) || string.IsNullOrWhiteSpace(CreateUserDtos.LastName) ||
-            string.IsNullOrWhiteSpace(CreateUserDtos.Email))
+        if (string.IsNullOrWhiteSpace(request.FirstName) ||
+            string.IsNullOrWhiteSpace(request.LastName) ||
+            string.IsNullOrWhiteSpace(request.Email))
         {
             return BadRequest("All fields are required.");
         }
-        
+
+        var userId = Guid.NewGuid();
         return Ok(new
-            {
-                UserId = Guid.NewGuid(),
-                UserName = $"user{Guid.NewGuid()}"
-            }
-        ); 
-
-
-
-
-
-
-
-
+        {
+            UserId = userId,
+            UserName = $"user{userId}"
+        });
     }
 
     [HttpGet("app-info")]
@@ -82,9 +74,8 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         return Ok(new
         {
             userId = id,
-            Message= "User deleted sucessfully ", 
+            Message = "User deleted successfully",
             userName = $"user{id}"
-
         });
     }
 
