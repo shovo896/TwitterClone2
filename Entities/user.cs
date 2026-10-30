@@ -12,7 +12,13 @@ namespace TwitterClone.Domain.Entities
        public User() : base(Guid.NewGuid())
        {
            
+           
+           
        }
+
+       private string _firstName;
+       private string _lastName;
+       private string _email; 
 
        public string FirstName
        {
