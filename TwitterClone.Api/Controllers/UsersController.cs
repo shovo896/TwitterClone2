@@ -99,6 +99,11 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
             
         }
         
+        
+        
+        
+        
+        
 
         return Ok(new
         {
@@ -106,4 +111,25 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
             phoneNumber
         });
     }
+    
+    private IActionResult GetUsers()
+    {
+        
+        new { 
+            UserId = Guid.NewGuid(),
+            Name = "Shuvo",
+            Handle = "@shuvo"
+            } 
+            
+            new { 
+                    userId = Guid.NewGuid(),
+                    UserName = "user2",
+                } 
+                
+            
+
+     
+        );
+    }
+}
 }
