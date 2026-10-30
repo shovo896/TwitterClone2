@@ -1,4 +1,3 @@
-using System;
 using Twitter_Clone.Entities;
 using TwitterClone.Domain.Entities;
 
@@ -17,11 +16,6 @@ mentionNotification.AddMessage("in a tweet");
 var systemNotification = new SystemNotification();
 systemNotification.AddMessage("Welcome to Twitter Clone.");
 
-var maxTweetLength=Tweet.MaxContentLength;
-
-
-
-
 var notifications = new List<Notification>
 {
     likeNotification,
@@ -35,5 +29,4 @@ foreach (var notification in notifications)
 {
     Console.WriteLine(notification.GetMessage());
 }
-
 
