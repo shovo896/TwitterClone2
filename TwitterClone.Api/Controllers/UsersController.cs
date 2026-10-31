@@ -31,9 +31,8 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         {
             return BadRequest("All fields are required.");
         }
-        var userRepository = new UserRepository();
 
-        var createdUser = new UserRepository();
+        var user = new User
         {
             FirstName = request.FirstName,
             LastName = request.LastName,
@@ -96,14 +95,7 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         if (string.IsNullOrWhiteSpace(phoneNumber))
         {
             return BadRequest("Phone number is required.");
-            
         }
-        
-        
-        
-        
-        
-        
 
         return Ok(new
         {
@@ -111,25 +103,4 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
             phoneNumber
         });
     }
-    
-    private IActionResult GetUsers()
-    {
-        
-        new { 
-            UserId = Guid.NewGuid(),
-            Name = "Shuvo",
-            Handle = "@shuvo"
-            } 
-            
-            new { 
-                    userId = Guid.NewGuid(),
-                    UserName = "user2",
-                } 
-                
-            
-
-     
-        );
-    }
-}
 }
