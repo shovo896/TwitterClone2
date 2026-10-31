@@ -111,6 +111,11 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
     [HttpDelete("{id:guid}/phoneNumber")]
     public IActionResult DeleteUserPhoneNumber([FromRoute] Guid id)
     {
+
+        if (user == null)
+        {
+            return NotFound(); 
+        }
         return Ok(new
         {
             userId = id,
