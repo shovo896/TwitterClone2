@@ -71,13 +71,19 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
     });
 
     [HttpGet("{id:guid}")]
-    public IActionResult GetUserById([FromRoute] Guid id) => 
-        
-        Ok(new
+    public IActionResult GetUserById([FromRoute] Guid id) =>
+
+
     {
-        
-        
-        
+
+        vav user = _userRepository.GetUserById(id);
+        if (User == null)
+        {
+            return Notfound(); 
+            
+        }
+
+        return OkObjectResult(user); 
         
         
         
