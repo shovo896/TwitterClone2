@@ -116,6 +116,12 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         {
             return NotFound(); 
         }
+
+        var idDeleted = _userRepository.DeleteUser(user);
+        if (!isDeleted)
+        {
+            return StatusCode(500,"An error occurred while deleting the user.");
+        }
         return Ok(new
         {
             userId = id,
