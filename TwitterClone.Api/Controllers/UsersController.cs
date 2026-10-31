@@ -131,5 +131,20 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
             userId = id,
             phoneNumber
         });
+        
     }
+}
+public IActionResult UpdateUser([FormRoute] Guid id, [FormBody] UpdateUserDtos updateUserDtos)
+{
+    var user = _userRepository.GetUserById(id);
+    if (user == null)
+    {
+        return NotFound(); 
+    }
+
+    user.FirstName = updateUserDtos.FirstName;
+    user.LastName = updateUserDtos.LastName;
+    _userRepository.UpdateUser(user);
+    return Ok(user
+    );
 }
