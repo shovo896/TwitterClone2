@@ -1,3 +1,4 @@
+using Twitter_Clone.TwitterClone.Api.Data;
 using TwitterClone.Api.Options;
 using TwitterClone.Api.Services;
 
@@ -15,6 +16,11 @@ builder.Services
     .ValidateOnStart();
 
 var app = builder.Build();
+
+
+
+// repositories registration 
+builder.Services.AddSingleton<UserRepository>(); // its also an api 
 
 app.UseExceptionHandler();
 
