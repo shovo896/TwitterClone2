@@ -33,4 +33,9 @@ public class UserRepository
     {
         return _users.SingleOrDefault(u => u.Id == id);
     }
+
+    public User? GetUserByEmail(string email)
+    {
+        return _users.SingleOrDefault(u => u.Email == email);
+    }
 }

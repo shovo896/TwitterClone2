@@ -11,6 +11,13 @@ namespace TwitterClone.Api.Controllers;
 [Route("api/[controller]")]
 public sealed class UsersController(IConfiguration configuration) : ControllerBase
 {
+
+    private readonly UserRepository _userRepository
+    {
+        _userRepository = userRepository; 
+    }
+    
+   
     
     
     [HttpGet]
@@ -57,8 +64,17 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
     });
 
     [HttpGet("{id:guid}")]
-    public IActionResult GetUserById([FromRoute] Guid id) => Ok(new
+    public IActionResult GetUserById([FromRoute] Guid id) => 
+        
+        Ok(new
     {
+        
+        
+        
+        
+        
+        
+        
         userId = id,
         userName = $"user{id}"
     });
