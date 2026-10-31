@@ -46,12 +46,20 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
             return BadRequest("User already exists.");
         }
 
-        var user = new User
+        var Createuser = new CreateUser
         {
             FirstName = request.FirstName,
             LastName = request.LastName,
             Email = request.Email
         };
+        return Ok(new UserDtos
+            {
+                FirstName = CreateUserDtos.FirstName,
+                LastName = CreateUserDtos.LastName,
+                Email = CreateUserDtos.Email
+
+            }
+        ); 
 
         var userRepository = new UserRepository();
         userRepository.AddUser(user);
