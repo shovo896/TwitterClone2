@@ -38,6 +38,13 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         {
             return BadRequest("All fields are required.");
         }
+        
+        var  existingUser = _userRepository.GetUserByEmail(CreateUserDtos.Email);
+
+        if (existingUser != null)
+        {
+            return BadRequest("User already exists.");
+        }
 
         var user = new User
         {
