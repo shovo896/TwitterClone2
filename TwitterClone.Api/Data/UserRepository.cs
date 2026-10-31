@@ -4,7 +4,7 @@ namespace Twitter_Clone.TwitterClone.Api.Data;
 
 public class UserRepository
 {
-    private readonly List<User> _users = new();
+    private List<User> _users { get;set } = new List<User>();
 
     public User AddUser(User user)
     {
