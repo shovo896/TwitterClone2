@@ -4,7 +4,9 @@ namespace Twitter_Clone.TwitterClone.Api.Data;
 
 public class UserRepository
 {
-    private List<User> _users { get;set } = new List<User>();
+    private readonly List<User> _users = new();
+
+    public IReadOnlyCollection<User> GetUsers() => _users.AsReadOnly();
 
     public User AddUser(User user)
     {
@@ -36,6 +38,7 @@ public class UserRepository
 
     public User? GetUserByEmail(string email)
     {
-        return _users.SingleOrDefault(u => u.Email == email);
+        return _users.SingleOrDefault(u =>
+            string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase));
     }
 }

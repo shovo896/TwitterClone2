@@ -9,24 +9,13 @@ namespace TwitterClone.Api.Controllers;
 [ApiController]
 [Authorize]
 [Route("api/[controller]")]
-public sealed class UsersController(IConfiguration configuration) : ControllerBase
+public sealed class UsersController(
+    IConfiguration configuration,
+    UserRepository userRepository) : ControllerBase
 {
-
-    private readonly UserRepository _userRepository
-    {
-        _userRepository = userRepository; 
-    }
-    
-   
-    
-    
     [HttpGet]
-    public ActionResult<IEnumerable<object>> GetUsers() => Ok(new[]
-    {
-        new { id = 1, name = "Shuvo", handle = "@shuvo" },
-        new { id = 2, name = "CPS Academy", handle = "@cpsacademy" },
-        new { id = 3, name = "ASP.NET Learner", handle = "@dotnetlearner" }
-    });
+    public ActionResult<IEnumerable<User>> GetUsers() =>
+        Ok(userRepository.GetUsers());
 
     [HttpPost]
     [AllowAnonymous]
@@ -38,37 +27,19 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
         {
             return BadRequest("All fields are required.");
         }
-        
-        var  existingUser = _userRepository.GetUserByEmail(CreateUserDtos.Email);
 
-        if (existingUser != null)
-        {
-            return BadRequest("User already exists.");
-        }
+        if (userRepository.GetUserByEmail(request.Email) is not null)
+            return Conflict("A user with this email already exists.");
 
-        var Createuser = new CreateUser
+        var user = new User
         {
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            Email = request.Email
+            FirstName = request.FirstName.Trim(),
+            LastName = request.LastName.Trim(),
+            Email = request.Email.Trim()
         };
-        return Ok(new UserDtos
-            {
-                FirstName = CreateUserDtos.FirstName,
-                LastName = CreateUserDtos.LastName,
-                Email = CreateUserDtos.Email
 
-            }
-        ); 
-
-        var userRepository = new UserRepository();
         userRepository.AddUser(user);
-
-        return Ok(new
-        {
-            UserId = user.Id,
-            UserName = $"user{user.Id}"
-        });
+        return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
     }
 
     [HttpGet("app-info")]
@@ -80,66 +51,34 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
 
     [HttpGet("{id:guid}")]
     public IActionResult GetUserById([FromRoute] Guid id) =>
-
-
-    {
-
-        vav user = _userRepository.GetUserById(id);
-        if (User == null)
-        {
-            return Notfound(); 
-            
-        }
-
-        return OkObjectResult(user); 
-        
-        
-        
-        
-        userId = id,
-        userName = $"user{id}"
-    });
+        userRepository.GetUserById(id) is { } user ? Ok(user) : NotFound();
 
     [HttpPut("{id:guid}/phoneNumber")]
     public IActionResult UpdateUserPhoneNumber(
         [FromRoute] Guid id,
-        [FromBody] string phoneNumber)
-    {
-        return UpdatePhoneNumber(id, phoneNumber);
-    }
+        [FromBody] string phoneNumber) =>
+        UpdatePhoneNumber(id, phoneNumber);
 
     [HttpPatch("{id:guid}/phoneNumber")]
     public IActionResult PatchUserPhoneNumber(
         [FromRoute] Guid id,
-        [FromBody] string phoneNumber)
-    {
-        return UpdatePhoneNumber(id, phoneNumber);
-    }
+        [FromBody] string phoneNumber) =>
+        UpdatePhoneNumber(id, phoneNumber);
 
     [HttpDelete("{id:guid}/phoneNumber")]
     public IActionResult DeleteUserPhoneNumber([FromRoute] Guid id)
     {
+        if (userRepository.GetUserById(id) is null)
+            return NotFound();
 
-        if (user == null)
-        {
-            return NotFound(); 
-        }
-
-        var idDeleted = _userRepository.DeleteUser(user);
-        if (!isDeleted)
-        {
-            return StatusCode(500,"An error occurred while deleting the user.");
-        }
-        return Ok(new
-        {
-            userId = id,
-            Message = "User deleted successfully",
-            userName = $"user{id}"
-        });
+        return NoContent();
     }
 
     private IActionResult UpdatePhoneNumber(Guid id, string phoneNumber)
     {
+        if (userRepository.GetUserById(id) is null)
+            return NotFound();
+
         if (string.IsNullOrWhiteSpace(phoneNumber))
         {
             return BadRequest("Phone number is required.");
@@ -150,20 +89,5 @@ public sealed class UsersController(IConfiguration configuration) : ControllerBa
             userId = id,
             phoneNumber
         });
-        
     }
-}
-public IActionResult UpdateUser([FormRoute] Guid id, [FormBody] UpdateUserDtos updateUserDtos)
-{
-    var user = _userRepository.GetUserById(id);
-    if (user == null)
-    {
-        return NotFound(); 
-    }
-
-    user.FirstName = updateUserDtos.FirstName;
-    user.LastName = updateUserDtos.LastName;
-    _userRepository.UpdateUser(user);
-    return Ok(user
-    );
 }

@@ -14,13 +14,9 @@ builder.Services
     .Bind(builder.Configuration.GetSection(TwitterSettings.SectionName))
     .ValidateDataAnnotations()
     .ValidateOnStart();
+builder.Services.AddSingleton<UserRepository>();
 
 var app = builder.Build();
-
-
-
-// repositories registration 
-builder.Services.AddSingleton<UserRepository>(); // its also an api 
 
 app.UseExceptionHandler();
 
