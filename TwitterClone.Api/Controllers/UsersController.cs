@@ -85,7 +85,6 @@ public sealed class UsersController(
         }
         
         
-        
 
         return Ok(new
         {
