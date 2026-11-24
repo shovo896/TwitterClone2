@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\twgy\" />
+    <Folder Include="TwitterCloneApplication\" />
   </ItemGroup>
 
 </Project>
