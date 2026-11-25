@@ -1,8 +1,9 @@
+using Twitter_Clone.TwitterClone.Application.services;
 using TwitterClone.Domain.Entities;
 
 namespace Twitter_Clone.TwitterClone.Api.Data;
 
-public class UserRepository
+public class UserRepository : IuserRepository 
 {
     private readonly List<User> _users = new();
 
