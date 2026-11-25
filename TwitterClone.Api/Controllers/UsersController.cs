@@ -9,10 +9,15 @@ namespace TwitterClone.Api.Controllers;
 [ApiController]
 [Authorize]
 [Route("api/[controller]")]
+
+public UserController (IUserService _userService){
+    _userService = userService;
+}
+
 public sealed class UsersController(
     IConfiguration configuration,
     UserRepository userRepository) : ControllerBase
-{
+
     [HttpGet]
     public ActionResult<IEnumerable<User>> GetUsers() =>
         Ok(userRepository.GetUsers());
