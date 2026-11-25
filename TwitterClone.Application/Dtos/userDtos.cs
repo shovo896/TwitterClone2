@@ -2,7 +2,7 @@ namespace TwitterClone.Application.Dtos;
 
 public class userDtos
 {
-    public required string {
+    public required string FirstName {
         get;
         set; 
     }
