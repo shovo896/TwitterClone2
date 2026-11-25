@@ -88,13 +88,17 @@ public sealed class UsersController(
         {
             return BadRequest("Phone number is required.");
         }
-        
-        
+
 
         return Ok(new
         {
             userId = id,
             phoneNumber
         });
-    }
-}
+        
+        public IActionResult GetUsers(Guid id) {
+            
+
+        } 
+
+        }
