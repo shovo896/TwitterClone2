@@ -7,5 +7,9 @@ public class UserServices
     public interface UserServices : IUserService
     {
         userDtos CreateUserDto(CreateUserDtos createUserDtos);
+        userDtos GetUserDtoById(Guid  id);
+        
     }
+    
+    
 }
