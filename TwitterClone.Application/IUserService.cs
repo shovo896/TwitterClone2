@@ -9,6 +9,7 @@ public interface IUserService
     CreateUserDtos UpdateUser (Guid id, UpdateUserDtos updateUserDto); 
     bool DeleteUser (Guid id); 
     bool DeleteUserById (Guid id);
+    List <UserDtos>  GetUsers();
     
     
     
