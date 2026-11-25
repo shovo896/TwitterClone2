@@ -12,6 +12,9 @@ public class IuserRepository
       
       bool DeleteUser(Guid id); 
       bool DeleteUserById(Guid id); 
+      List<User> GetUsers(); 
+      User GetUserByEmail(string email);
+      
       
     }
 }
