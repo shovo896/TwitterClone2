@@ -1,5 +1,6 @@
 using Twitter_Clone.TwitterClone.Application.services;
 using TwitterClone.Domain.Entities;
+using TwitterClone.Application.Interface
 
 namespace Twitter_Clone.TwitterClone.Api.Data;
 
