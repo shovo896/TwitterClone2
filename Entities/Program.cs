@@ -16,3 +16,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwagger(); 
 }
+
+app.UserhttpsRedirection(); 
+app.UseAuthorization(); 
+app.MapControllers(); 
+app.Run();
