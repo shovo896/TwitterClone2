@@ -22,37 +22,9 @@ public sealed class UsersController(
     public ActionResult<IEnumerable<User>> GetUsers() =>
         Ok(userRepository.GetUsers());
 
-    [HttpPost]
-    [AllowAnonymous]
-    public IActionResult CreateUser([FromBody] CreateUserDtos request)
-    {
-        if (string.IsNullOrWhiteSpace(request.FirstName) ||
-            string.IsNullOrWhiteSpace(request.LastName) ||
-            string.IsNullOrWhiteSpace(request.Email))
-        {
-            return BadRequest("All fields are required.");
-        }
-
-        if (userRepository.GetUserByEmail(request.Email) is not null)
-            return Conflict("A user with this email already exists.");
-
-        var user = new User
-        {
-            FirstName = request.FirstName.Trim(),
-            LastName = request.LastName.Trim(),
-            Email = request.Email.Trim()
-        };
-
-        userRepository.AddUser(user);
-        return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
-    }
-
-    [HttpGet("app-info")]
-    public IActionResult GetAppInfo() => Ok(new
-    {
-        appName = configuration["AppName"],
-        environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"
-    });
+   epository.AddUser(user);
+        return
+ 
 
     [HttpGet("{id:guid}")]
     public IActionResult GetUserById([FromRoute] Guid id) =>
