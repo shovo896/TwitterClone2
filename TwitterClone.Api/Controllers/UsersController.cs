@@ -10,6 +10,23 @@ namespace TwitterClone.Api.Controllers;
 [Authorize]
 [Route("api/[controller]")]
 
+public IActionResult CreateUser([FromBody] CreateUserDtos createUserDto)
+{
+    
+    var createUser = _userService.CreateUser(createUserDto);
+    if (createUser is null)
+    {
+        return BadRequest();
+    }
+    return Ok( new UserDto
+    {
+        id =createUser.Id , 
+        FirstName = createUser.FirstName , 
+        LastName =createUser.LastName , 
+        Email = createUser.Email 
+    })
+}
+
 public UserController (IUserService _userService){
     _userService = userService;
 }
