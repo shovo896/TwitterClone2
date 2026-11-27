@@ -31,7 +31,7 @@ public class UserServices
             }
 
             if (userRepository.GetUserByEmail(request.Email) is not null)
-                return Conflict("A user with this email already exists.");
+                return null; 
 
             var user = new User
             {
