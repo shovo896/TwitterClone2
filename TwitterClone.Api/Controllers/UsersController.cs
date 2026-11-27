@@ -85,8 +85,24 @@ public sealed class UsersController(
             phoneNumber
         });
         
-        public IActionResult GetUsers(Guid id) {
+        public IActionResult GetUsersById(Guid id)
+        {
+
+            var User = _userService.GetUserId(id);
+            if (User is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(UserDto
+            {
+                Id = user_id;
+                FirstName = user.FirstName;
+                LastName = user.LastName;
+                Email = user.Email;
+            }); 
             
+
 
         } 
 
