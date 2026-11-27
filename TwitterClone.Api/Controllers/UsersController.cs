@@ -111,7 +111,7 @@ public sealed class UsersController(
                     return NotFound();
                 }
 
-                var isDeleted = _userRepository.DeleteUser(user);
+                var isDeleted = _userService.DeleteUser(user);
 
                 return Ok(UserDto
                 {
