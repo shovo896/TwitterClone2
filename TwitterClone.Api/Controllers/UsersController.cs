@@ -62,7 +62,7 @@ public sealed class UsersController(
     [HttpDelete("{id:guid}/phoneNumber")]
     public IActionResult DeleteUserPhoneNumber([FromRoute] Guid id)
     {
-        if (userRepository.GetUserById(id) is null)
+        if (user is null)
             return NotFound();
 
         return NoContent();
@@ -101,6 +101,25 @@ public sealed class UsersController(
                 LastName = user.LastName;
                 Email = user.Email;
             }); 
+            
+            public IActionResult Delete([FromRoute] Guid id)
+            {
+
+                var User = _userService.DeleteUser(id);
+                if (User is null)
+                {
+                    return NotFound();
+                }
+
+                var isDeleted = _userRepository.DeleteUser(user);
+
+                return Ok(UserDto
+                {
+                    Id = user_id;
+                    FirstName = user.FirstName;
+                    LastName = user.LastName;
+                    Email = user.Email;
+                }); 
             
 
 
