@@ -26,7 +26,7 @@ public class UserServices
                     string.IsNullOrWhiteSpace(request.LastName) ||
                     string.IsNullOrWhiteSpace(request.Email))
                 {
-                    return BadRequest("All fields are required.");
+                    return null;
                 } CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
             }
 
