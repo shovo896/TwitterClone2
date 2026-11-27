@@ -106,7 +106,7 @@ public sealed class UsersController(
             {
 
                 var User = _userService.DeleteUser(id);
-                if (User is null)
+                if (User == false )
                 {
                     return NotFound();
                 }
