@@ -12,7 +12,9 @@ public class UserServices
 
         public class UserService(IuserRepository.IUserRepository repository)
         {
+            _userRepository = userRepository; 
             
+
         }
         userDtos CreateUserDto(CreateUserDtos createUserDtos);{ 
             
