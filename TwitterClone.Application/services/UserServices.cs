@@ -41,7 +41,27 @@ public class UserServices
             };
 
             userRepository.AddUser(user);
-            return;
+            return  ;
+            var existingUser = _userRepository.GetUserEmail(CreateUserDtos.Email);
+            if (existingUser != null)
+            {
+                return null; 
+            }
+            var createUser =_userRepository.AddUser(new User())
+            {
+                FirstName = CreateUserDtos.FirstName;
+                LastName = createUserDtos.LastName;
+                Email = createUserDtos.Email;
+            }
+            return new UserDtos
+            {
+                Id = createUser.Id,
+                FirstName = createUser.FirstName,
+                LastName = createUser.LastName;
+                Email = createUser.Email;
+
+            }; 
+            
 
 
 
