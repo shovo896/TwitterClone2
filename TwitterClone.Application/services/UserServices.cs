@@ -70,7 +70,18 @@ public class UserServices
         }
         userDtos GetUserDtoById(Guid  id); 
         
-        userDtos UpdateUserDto(UpdateUserDtos updateUserDtos); 
+        userDtos UpdateUserDto(UpdateUserDtos updateUserDtos); {
+            var user = _userRepository.GetUserById(); 
+            return new UserDtos
+            {
+                Id = createUser.Id,
+                FirstName = createUser.FirstName,
+                LastName = createUser.LastName;
+                Email = createUser.Email;
+
+            }; 
+            
+        }
         userDtos DeleteUserDto(Guid id);
         
     }
