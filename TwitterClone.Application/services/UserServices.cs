@@ -17,7 +17,7 @@ public class UserServices
                     string.IsNullOrWhiteSpace(request.Email))
                 {
                     return BadRequest("All fields are required.");
-                }n CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
+                } CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
             }
 
             if (userRepository.GetUserByEmail(request.Email) is not null)
