@@ -7,7 +7,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointApiExplorer(); 
 builder.Services.AddSwaggerGen(); 
 
-bulder.Services.AddSingleton<createReqUserRepository>();
+bulder.Services.AddSingleton<IUserRepository,UserRepository>();
 
 var app = builder.Build();
 
