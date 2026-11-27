@@ -1,3 +1,4 @@
+using TwitterClone.Application;
 using TwitterClone.Application.Dtos;
 
 namespace Twitter_Clone.TwitterClone.Application.services;
@@ -6,6 +7,11 @@ public class UserServices
 {
     public interface UserServices: IUserService
     {
+
+        public class UserService(IuserRepository.IUserRepository repository)
+        {
+            
+        }
         userDtos CreateUserDto(CreateUserDtos createUserDtos);{ 
             
             [HttpPost]
