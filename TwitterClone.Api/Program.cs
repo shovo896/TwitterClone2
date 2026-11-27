@@ -1,6 +1,9 @@
-using Twitter_Clone.TwitterClone.Api.Data;
+using TwitterClone.Api.Data;
 using TwitterClone.Api.Options;
 using TwitterClone.Api.Services;
+using TwitterClone.Application;
+using TwitterClone.Application.Repositories;
+using TwitterClone.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddProblemDetails();
 builder.Services.AddSingleton<TweetStore>();
+builder.Services.AddSingleton<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services
     .AddOptions<TwitterSettings>()
     .Bind(builder.Configuration.GetSection(TwitterSettings.SectionName))

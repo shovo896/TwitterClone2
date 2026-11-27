@@ -1,20 +1,13 @@
 using TwitterClone.Domain.Entities;
 
-namespace Twitter_Clone.TwitterClone.Application.services;
+namespace TwitterClone.Application.Repositories;
 
-public class IuserRepository
+public interface IUserRepository
 {
-   public  interface IUserRepository
-    {
-      User AddUser(User user); 
-      
-      User UpdateUser(User user);
-      
-      bool DeleteUser(Guid id); 
-      bool DeleteUserById(Guid id); 
-      List<User> GetUsers(); 
-      User GetUserByEmail(string email);
-      
-      
-    }
+    User? AddUser(User user);
+    User? UpdateUser(User user);
+    bool DeleteUser(Guid id);
+    User? GetUserById(Guid id);
+    User? GetUserByEmail(string email);
+    IReadOnlyList<User> GetUsers();
 }

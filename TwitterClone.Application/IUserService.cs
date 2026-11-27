@@ -4,14 +4,9 @@ namespace TwitterClone.Application;
 
 public interface IUserService
 {
-    userDtos CreateUser(CreateUserDtos createUserDto); 
-    userDtos GetUserById (Guid id);
-    CreateUserDtos UpdateUser (Guid id, UpdateUserDtos updateUserDto); 
-    bool DeleteUser (Guid id); 
-    UserDto UpadateUser (Guid id, UpdateUserDtos updateUserDto);
-    bool DeleteUserById (Guid id);
-    List <UserDtos>  GetUsers();
-    
-    
-    
+    UserDto? CreateUser(CreateUserDtos createUserDto);
+    UserDto? GetUserById(Guid id);
+    IReadOnlyList<UserDto> GetUsers();
+    UserDto? UpdateUser(Guid id, UpdateUserDtos updateUserDto);
+    bool DeleteUser(Guid id);
 }

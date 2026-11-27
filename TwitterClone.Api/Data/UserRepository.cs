@@ -1,44 +1,73 @@
+using TwitterClone.Application.Repositories;
 using TwitterClone.Domain.Entities;
 
-namespace Twitter_Clone.TwitterClone.Api.Data;
+namespace TwitterClone.Api.Data;
 
-public class UserRepository
+public sealed class UserRepository : IUserRepository
 {
-    private readonly List<User> _users = new();
+    private readonly object _gate = new();
+    private readonly Dictionary<Guid, User> _users = new();
 
-    public IReadOnlyCollection<User> GetUsers() => _users.AsReadOnly();
-
-    public User AddUser(User user)
+    public IReadOnlyList<User> GetUsers()
     {
-        _users.Add(user);
-        return user;
-    }
-
-    public User UpdateUser(User user)
-    {
-        var index = _users.FindIndex(u => u.Id == user.Id);
-        if (index >= 0)
+        lock (_gate)
         {
-            _users[index] = user;
+            return _users.Values.ToArray();
         }
-
-        return user;
     }
 
-    public User DeleteUser(User user)
+    public User? AddUser(User user)
     {
-        _users.RemoveAll(u => u.Id == user.Id);
-        return user;
+        lock (_gate)
+        {
+            if (_users.Values.Any(existing =>
+                    string.Equals(existing.Email, user.Email, StringComparison.OrdinalIgnoreCase)))
+            {
+                return null;
+            }
+
+            _users.Add(user.Id, user);
+            return user;
+        }
+    }
+
+    public User? UpdateUser(User user)
+    {
+        lock (_gate)
+        {
+            if (!_users.ContainsKey(user.Id))
+            {
+                return null;
+            }
+
+            user.SetModified();
+            _users[user.Id] = user;
+            return user;
+        }
+    }
+
+    public bool DeleteUser(Guid id)
+    {
+        lock (_gate)
+        {
+            return _users.Remove(id);
+        }
     }
 
     public User? GetUserById(Guid id)
     {
-        return _users.SingleOrDefault(u => u.Id == id);
+        lock (_gate)
+        {
+            return _users.GetValueOrDefault(id);
+        }
     }
 
     public User? GetUserByEmail(string email)
     {
-        return _users.SingleOrDefault(u =>
-            string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase));
+        lock (_gate)
+        {
+            return _users.Values.SingleOrDefault(user =>
+                string.Equals(user.Email, email, StringComparison.OrdinalIgnoreCase));
+        }
     }
 }

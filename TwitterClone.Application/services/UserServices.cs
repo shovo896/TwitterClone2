@@ -1,110 +1,67 @@
-using TwitterClone.Application;
 using TwitterClone.Application.Dtos;
+using TwitterClone.Application.Repositories;
+using TwitterClone.Domain.Entities;
 
-namespace Twitter_Clone.TwitterClone.Application.services;
+namespace TwitterClone.Application.Services;
 
-public class UserServices
+public sealed class UserService(IUserRepository userRepository) : IUserService
 {
-    public interface UserServices: IUserService
+    public UserDto? CreateUser(CreateUserDtos createUserDto)
     {
-        private readonly IuserRepository _userRepository; 
-        
-
-        public class UserService(IuserRepository.IUserRepository repository)
+        if (string.IsNullOrWhiteSpace(createUserDto.FirstName) ||
+            string.IsNullOrWhiteSpace(createUserDto.LastName) ||
+            string.IsNullOrWhiteSpace(createUserDto.Email))
         {
-            _userRepository = userRepository; 
-            
-
+            return null;
         }
-        userDtos CreateUserDto(CreateUserDtos createUserDtos);{ 
-            
-            [HttpPost]
-            [AllowAnonymous]
-            public IActionResult CreateUser([FromBody] CreateUserDtos request)
-            {
-                if (string.IsNullOrWhiteSpace(request.FirstName) ||
-                    string.IsNullOrWhiteSpace(request.LastName) ||
-                    string.IsNullOrWhiteSpace(request.Email))
-                {
-                    return null;
-                } CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
-            }
 
-            if (userRepository.GetUserByEmail(request.Email) is not null)
-                return null; 
-
-            var user = new User
-            {
-                FirstName = request.FirstName.Trim(),
-                LastName = request.LastName.Trim(),
-                Email = request.Email.Trim()
-            };
-
-            userRepository.AddUser(user);
-            return  ;
-            var existingUser = _userRepository.GetUserEmail(CreateUserDtos.Email);
-            if (existingUser != null)
-            {
-                return null; 
-            }
-            var createUser =_userRepository.AddUser(new User())
-            {
-                FirstName = CreateUserDtos.FirstName;
-                LastName = createUserDtos.LastName;
-                Email = createUserDtos.Email;
-            }
-            return new UserDtos
-            {
-                Id = createUser.Id,
-                FirstName = createUser.FirstName,
-                LastName = createUser.LastName;
-                Email = createUser.Email;
-
-            }; 
-            
-
-
-
-
-
-        }
-        userDtos GetUserDtoById(Guid  id); 
-        
-        userDtos UpdateUserDto(UpdateUserDtos updateUserDtos); {
-            var user = _userRepository.GetUserById(); 
-            return new UserDtos(
-            {
-                Id = createUser.Id,
-                FirstName = createUser.FirstName,
-                LastName = createUser.LastName;
-                Email = createUser.Email;
-
-            }); 
-            
-        }
-        userDtos DeleteUserDto(Guid id);
-
-
-        public UserDto Update UpdateUserDtos(Guid id, UpdateUserDtos updateUserDtos)
+        var user = new User
         {
-            var user = _userRepository.GetUserById(id);
-            if (user is null)
-            {
-                return null; 
-            }
-            user.FirstName =updateUserDtos.FirstName; 
-            user.LastName = updateUserDtos.LastName; 
-            _userRepository.UpdateUser(user);
-            return new UserDto
-            {
-                Id =user.id ,
-                FirstName = user.FirstName ; 
-                    LastName  =user.LastName ; 
-                    Email = user.Email ;
-            }
-        }
+            FirstName = createUserDto.FirstName.Trim(),
+            LastName = createUserDto.LastName.Trim(),
+            Email = createUserDto.Email.Trim()
+        };
 
+        var createdUser = userRepository.AddUser(user);
+        return createdUser is null ? null : ToDto(createdUser);
     }
-    
-    
+
+    public UserDto? GetUserById(Guid id)
+    {
+        var user = userRepository.GetUserById(id);
+        return user is null ? null : ToDto(user);
+    }
+
+    public IReadOnlyList<UserDto> GetUsers() =>
+        userRepository.GetUsers().Select(ToDto).ToArray();
+
+    public UserDto? UpdateUser(Guid id, UpdateUserDtos updateUserDto)
+    {
+        if (string.IsNullOrWhiteSpace(updateUserDto.FirstName) ||
+            string.IsNullOrWhiteSpace(updateUserDto.LastName))
+        {
+            return null;
+        }
+
+        var user = userRepository.GetUserById(id);
+        if (user is null)
+        {
+            return null;
+        }
+
+        user.FirstName = updateUserDto.FirstName.Trim();
+        user.LastName = updateUserDto.LastName.Trim();
+        var updatedUser = userRepository.UpdateUser(user);
+        return updatedUser is null ? null : ToDto(updatedUser);
+    }
+
+    public bool DeleteUser(Guid id) => userRepository.DeleteUser(id);
+
+    private static UserDto ToDto(User user) => new()
+    {
+        Id = user.Id,
+        FirstName = user.FirstName,
+        LastName = user.LastName,
+        Email = user.Email
+    };
 }
