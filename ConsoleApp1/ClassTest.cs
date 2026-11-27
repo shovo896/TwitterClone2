@@ -1,26 +1,27 @@
 using Twitter_Clone.Entities;
 using TwitterClone.Domain.Entities;
 
-namespace ConsoleApp1;
-
-public class ClassTest
+namespace ConsoleApp1
 {
-    public void Run()
+    public class ClassTest
     {
-        BaseEntity likeNotification = new LikeNotification(Guid.NewGuid());
-        var notifications = new List<Notification>()
+        public void Run()
         {
-            new LikeNotification(Guid.NewGuid()),
-            new CommentNotification(Guid.NewGuid()),
-            new FollosRequestNotification(Guid.NewGuid()),
-            new MentionNotification(Guid.NewGuid()),
-            new SystemNotification()
-        };
-        
-        foreach(var notification in notifications)
+            BaseEntity likeNotification = new LikeNotification(Guid.NewGuid());
+            var notifications = new List<Notification>()
             {
-            Console.WriteLine(notification.GetMessage());
+                new LikeNotification(Guid.NewGuid()),
+                new CommentNotification(Guid.NewGuid()),
+                new FollosRequestNotification(Guid.NewGuid()),
+                new MentionNotification(Guid.NewGuid()),
+                new SystemNotification()
+            };
+
+            foreach (var notification in notifications)
+            {
+                Console.WriteLine(notification.GetMessage());
             }
+        }
     }
 }
 
