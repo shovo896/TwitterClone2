@@ -7,6 +7,8 @@ public class UserServices
 {
     public interface UserServices: IUserService
     {
+        private readonly IuserRepository _userRepository; 
+        
 
         public class UserService(IuserRepository.IUserRepository repository)
         {
