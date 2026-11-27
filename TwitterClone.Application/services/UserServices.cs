@@ -83,7 +83,27 @@ public class UserServices
             
         }
         userDtos DeleteUserDto(Guid id);
-        
+
+
+        public UserDto Update UpdateUserDtos(Guid id, UpdateUserDtos updateUserDtos)
+        {
+            var user = _userRepository.GetUserById(id);
+            if (user is null)
+            {
+                return null; 
+            }
+            user.FirstName =updateUserDtos.FirstName; 
+            user.LastName = updateUserDtos.LastName; 
+            _userRepository.UpdateUser(user);
+            return new UserDto
+            {
+                Id =user.id ,
+                FirstName = user.FirstName ; 
+                    LastName  =user.LastName ; 
+                    Email = user.Email ;
+            }
+        }
+
     }
     
     
